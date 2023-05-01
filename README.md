@@ -20,33 +20,36 @@ This is a full-stack live streaming application built with Flask as the backend 
 1. Create a new React application using Vite: `npm init vite@latest my-app --template react`
 2. Install the required packages: `npm install react-router-dom axios react-stripe-elements @dogecoinapi/dogecoinapi`
 3. Create the necessary components for the frontend pages and services.
+4.Set up routes using react-router-dom.
+5.Use axios to make HTTP requests to the Flask backend.
+6.Integrate Stripe and Dogecoin API for donations/subscriptions/payments.
 
-Set up routes using react-router-dom.
-Use axios to make HTTP requests to the Flask backend.
-Integrate Stripe and Dogecoin API for donations/subscriptions/payments.
-Getting Started
+## Getting Started
 To get started, follow the steps below:
 
-Clone this repository: git clone https://github.com/<your-username>/<your-repo>.git
-Set up the backend as described in the Backend Setup section.
-Set up the frontend as described in the Frontend Setup section.
-Start the Flask server: python backend/app.py
-Start the React app: cd frontend && npm start
-Dependencies
+1.Clone this repository: git clone https://github.com/<your-username>/<your-repo>.git
+2.Set up the backend as described in the Backend Setup section.
+3.Set up the frontend as described in the Frontend Setup section.
+4.Start the Flask server: python backend/app.py
+5.Start the React app: cd frontend && npm start
+
+## Dependencies
 The backend requires the following packages:
 
-Flask
-Stripe
-DogecoinAPI
+-Flask
+-Stripe
+-DogecoinAPI
+
 The frontend requires the following packages:
 
-React
-React Router DOM
-Axios
-React Stripe Elements
-DogecoinAPI
-Credits
+-React
+-React Router DOM
+-Axios
+-React Stripe Elements
+-DogecoinAPI
+
+## Credits
 This project was created by Nicolas Rodriguez. If you have any questions or suggestions, please contact me at nicolasmrodriguez3@gmail.com.
 
-License
+## License
 This project is licensed under the MIT License. See the LICENSE file for details.
