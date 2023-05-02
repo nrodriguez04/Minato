@@ -1,6 +1,7 @@
 from flask import Blueprint, jsonify, request
 from flask_jwt_extended import jwt_required, create_access_token, get_jwt_identity
 from werkzeug.security import generate_password_hash, check_password_hash
+from authlib.integrations.flask_client import OAuth
 
 from models import User  # Assuming you have a User model defined in a separate file
 
@@ -57,4 +58,45 @@ def protected():
     user = User.query.get(user_id)
 
     return jsonify({'message': f'Hello, {user.username}! This endpoint is protected.'}), 200
+
+@auth_blueprint.route('/google/callback')
+def google_callback():
+    token = google.authorize_access_token()
+    resp = google.get('userinfo')
+    user_info = resp.json()
+
+    # Check if the user exists
+    user = User.query.filter_by(username=username).first()
+    if not user or not check_password_hash(user.password, password):
+        return jsonify({'error': 'Invalid username or password.'}), 401
+
+    # Create an access token for the user
+    access_token = create_access_token(identity=user.id)
+
+    return jsonify({'access_token': access_token})
+
+@auth_blueprint.route('/google/login')
+def google_login():
+    redirect_uri = url_for('auth.google_callback', _external=True)
+    return google.authorize_redirect(redirect_uri)
+
+# Initialize the OAuth object
+oauth = OAuth()
+
+# Set up the Google OAuth client
+google = oauth.register(
+    name='google',
+    client_id='263177419436-9b1tegoqb1r8ijnmi24aakl31aorpagv.apps.googleusercontent.com',
+    client_secret='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',
+    access_token_url='https://accounts.google.com/o/oauth2/token',
+    access_token_params=None,
+    authorize_url='https://accounts.google.com/o/oauth2/auth',
+    authorize_params=None,
+    api_base_url='https://www.googleapis.com/oauth2/v1/',
+    userinfo_endpoint='https://openidconnect.googleapis.com/v1/userinfo',
+    client_kwargs={'scope': 'openid email profile'},
+)
+
+# Add the Google OAuth client to your Flask app
+oauth.init_app(app)
 

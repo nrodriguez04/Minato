@@ -1,0 +1,21 @@
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+
+# Log files
+*.log
+
+# Virtual environment
+venv/
+
+# SQLite database files
+*.db
+
+# Environment variables and secrets
+.env
+*.env
+
+# IDE specific files
+.vscode/
+.idea/
