@@ -10,3 +10,9 @@ class User(db.Model):
     def __init__(self, email, password):
         self.email = email
         self.password = password
+
+    public_address = db.Column(db.String, unique=True, nullable=True)
+    two_factor_auth_enabled = db.Column(db.Boolean, default=False)
+    authy_id = db.Column(db.String, nullable=True)
+
+    
