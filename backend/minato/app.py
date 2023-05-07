@@ -5,6 +5,7 @@ from flask_restful import Api, Resource
 from flask_socketio import SocketIO
 
 from user import db
+from user import User
 from auth import auth_blueprint
 
 app = Flask(__name__)
